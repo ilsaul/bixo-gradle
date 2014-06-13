@@ -25,16 +25,32 @@ To get a list of valid targets:
 % cd <project directory>
 % ant -p
 
+or 
+
+% gradle -q tasks
+
 To  clean and build a jar (which also runs all tests):
 
 % ant clean jar
 
+or
+
+% gradle cleand build
+
 Note that "ant clean test jar" will currently fail, due to a bug in the maven ant task
 plugin used for managing dependencies.
+
+if you want to execute a build without the excute the test case use:
+
+% gradle -x test build
 
 To create Eclipse project files:
 
 % ant eclipse
+
+or
+
+% gradle eclipse
 
 Then, from Eclipse follow the standard procedure to import an existing Java project into your Workspace.
 
