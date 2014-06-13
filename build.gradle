@@ -1,0 +1,92 @@
+allprojects {
+	apply plugin: 'java'
+	apply plugin:'war'
+	apply plugin:'eclipse'
+
+	sourceCompatibility = 1.6
+	targetCompatibility = 1.6
+
+	repositories {
+		//flatDir { dirs "local-lib" }
+		maven { url "http://bixo.github.com/repo/" } // Bixo Repo
+		maven { url "http://conjars.org/repo" } // Conjars Repo
+		//maven { url "http://builds.archive.org:8080/maven2" } // heritrix Repo
+
+		mavenCentral()
+	}
+
+	dependencies {
+		compile group: 'cascading', name: 'cascading-core', version: '2.2.1'
+		compile (group: 'cascading', name: 'cascading-hadoop', version: '2.2.1') {
+			exclude module: 'log4j'
+		}
+		compile group: 'cascading', name: 'cascading-local', version: '2.2.1'
+		compile group: 'org.apache.tika', name: 'tika-parsers', version: '1.5'
+		compile group: 'commons-lang', name: 'commons-lang', version: '2.4'
+		compile group: 'commons-io', name: 'commons-io', version: '2.1'
+		compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.2.4'
+		compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.2.5'
+		testCompile group: 'cascading', name: 'cascading-core', version: '2.2.1'
+		compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.2'
+		compile group: 'org.apache.hadoop', name: 'hadoop-test', version: '1.0.4'
+		compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '8.1.8.v20121106'
+		compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '8.1.8.v20121106'
+		compile (group: 'jaxen', name: 'jaxen', version: '1.1.1') {
+			exclude group: 'xerces', module: 'xercesImpl'
+		}
+
+		providedCompile (group: 'org.apache.hadoop', name: 'hadoop-core', version: '1.0.4') {
+		    exclude group: 'org.mortbay.jetty', module: 'jetty'
+			exclude group: 'org.mortbay.jetty', module: 'jetty-util'
+			exclude group: 'org.mortbay.jetty', module: 'servlet-api'
+			exclude group: 'org.mortbay.jetty', module: 'servlet-api-2.5'
+			exclude group: 'org.apache.tomcat', module: 'servlet-api'
+			exclude group: 'ant', module: 'ant'
+		}
+	}
+}
+
+version = '1.0-SNAPSHOT'
+
+sourceSets {
+	it {
+		java {
+			srcDir 'src/it/java'
+		}
+		resources {
+			srcDir 'src/it/resources'
+		}
+	}
+}
+
+dependencies {
+	compile group: 'cascading', name: 'cascading-core'
+	compile group: 'cascading', name: 'cascading-hadoop'
+	compile group: 'cascading', name: 'cascading-local'
+	compile group: 'com.scaleunlimited', name: 'cascading.utils', version: '2.1.5'
+	compile group: 'org.apache.httpcomponents', name: 'httpcore'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient'
+	compile group: 'org.apache.tika', name: 'tika-parsers'
+	compile group: 'commons-lang', name: 'commons-lang'
+	compile group: 'commons-io', name: 'commons-io'
+	compile group: 'args4j', name: 'args4j', version: '2.0.18'
+
+	testCompile group: 'cascading', name: 'cascading-core'
+	testCompile group: 'org.slf4j', name: 'slf4j-log4j12'
+	testCompile group: 'junit', name: 'junit', version: '4.7'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '1.9.0'
+	testCompile group: 'org.apache.hadoop', name: 'hadoop-test'
+	testCompile group: 'org.eclipse.jetty', name: 'jetty-server'
+	testCompile group: 'org.eclipse.jetty', name: 'jetty-servlet'
+	testCompile group: 'it.unimi', name: 'dsiutils', version: '1.0.7'
+	testCompile group: 'it.unimi', name: 'fastutil5', version: '5.1.5'
+	testCompile group: 'it.unimi', name: 'webgraph', version: '2.4.2'
+	testCompile group: 'org.archive', name: 'heritrix', version: '1.14.3'
+	testCompile group: 'jaxen', name: 'jaxen'
+	//testCompile group: 'com.scaleunlimited', name: 'cascading.utils', version: '2.2.1' 
+	//providedCompile group: 'org.apache.hadoop', name: 'hadoop-core'
+	//providedCompile group: 'ant-eclipse', name: 'ant-eclipse-jvm1.2', version: '1.0'
+
+	testCompile group: 'cascading', name: 'cascading-test', version: '2.0.8-wip-366'
+	//testCompile group: 'org.archive.heritrix', name: 'heritrix', version: '3.2.0'
+}

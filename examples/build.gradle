@@ -1,0 +1,43 @@
+//apply plugin:'war'
+
+//targetCompatibility = 1.6
+
+version = '1.0-SNAPSHOT'
+
+dependencies {
+	compile project(':')
+	compile group: 'hsqldb', name: 'hsqldb', version: '1.8.0.7'
+	compile group: 'org.apache.lucene', name: 'lucene-core', version: '4.2.1'
+	compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '4.2.1'
+	compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+	runtime (group: 'jaxen', name: 'jaxen', version: '1.1.1') {
+		exclude group: 'xerces', module: 'xercesImpl'
+	}
+	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.2'
+	
+	providedCompile (group: 'org.apache.hadoop', name: 'hadoop-core', version: '1.0.4') {
+        exclude group: 'org.mortbay.jetty', module: 'jetty'
+		exclude group: 'org.mortbay.jetty', module: 'jetty-util'
+		exclude group: 'org.mortbay.jetty', module: 'servlet-api'
+		exclude group: 'org.mortbay.jetty', module: 'servlet-api-2.5'
+		exclude group: 'org.apache.tomcat', module: 'servlet-api'
+		exclude group: 'ant', module: 'ant'
+	}
+	
+	testCompile group: 'junit', name: 'junit', version: '4.7'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '1.8.0'
+	testCompile group: 'org.apache.hadoop', name: 'hadoop-test', version: '1.0.4'
+	
+	
+	compile (group: 'cascading', name: 'cascading-hadoop', version: '2.2.1') {
+		exclude group: 'log4j', module: 'log4j'
+	}
+	compile group: 'cascading', name: 'cascading-local', version: '2.2.1'
+	compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '8.1.8.v20121106'
+	compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '8.1.8.v20121106'
+	
+	//testCompile group: 'org.apache.hadoop', name: 'hadoop-test', version: '1.0.4'
+	//scope eclipse
+	//testCompile group: 'ant-eclipse', name: 'ant-eclipse-jvm1.2', version: '1.0'
+	//compile group: 'com.scaleunlimited', name: 'cascading.utils', version: '2.2.1'    
+}	
